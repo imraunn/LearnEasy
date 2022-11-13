@@ -56,7 +56,7 @@ const SingleStudentFile = ({ file, fileName, comment, late, name, photo }) => {
         <a href={file} target="_blank" title={fileName} rel="noreferrer">
           {name}
         </a>
-        <p>{late === 0 ? "Turned In Late" : "Turned In"}</p>
+        <p>{late === 0 ? "Turned In" : "Turned In Late"}</p>
       </div>
     </div>
   );

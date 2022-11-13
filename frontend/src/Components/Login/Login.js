@@ -85,9 +85,10 @@ const Login = ({ setLoginStatus }) => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <a className="forgotPass" href="/">
+        <a className="forgotPass" href="#">
           Forgot password?
         </a>
+
         <button className="opt-val-btn" type="submit">
           Login
         </button>

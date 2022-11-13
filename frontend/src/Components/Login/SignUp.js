@@ -96,9 +96,8 @@ const SignUp = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <a className="forgotPass" href="/">
-          Forgot password?
-        </a>
+
+        <br></br>
         <button className="opt-val-btn" type="submit">
           Sign Up
         </button>

@@ -4,13 +4,13 @@ import "./LoginPage.css";
 import Login from "./Login";
 import SignUp from "./SignUp";
 
-export default function MainPage({setLoginStatus}) {
+export default function MainPage({ setLoginStatus }) {
   const [login, setLogin] = useState(true);
-  const [message, setMessage] = useState("Don't you have an account?");
+  const [message, setMessage] = useState("Don't have an account?");
   const [option, setOption] = useState("SIGN UP");
   const optionHandler = () => {
     if (!login) {
-      setMessage("Don't you have an account?");
+      setMessage("Don't have an account?");
       setLogin(true);
       setOption("SIGN UP");
     } else {
@@ -21,7 +21,7 @@ export default function MainPage({setLoginStatus}) {
   };
   let showOption = <SignUp />;
   if (login) {
-    showOption = <Login setLoginStatus={setLoginStatus}/>;
+    showOption = <Login setLoginStatus={setLoginStatus} />;
   }
   return (
     <div className="main-box">
