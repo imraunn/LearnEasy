@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
-import announcementImg from '../../../assets/announcement.png';
+import announcementImg from "../../../assets/announcement.png";
 
 function StudentAnnouncement({ id }) {
   const [postAnnouncement, setPostAnnouncement] = useState([]);
@@ -37,8 +37,13 @@ function StudentAnnouncement({ id }) {
     </div>
   );
 }
-const SingleAnnouncement = ({ announcement, my_timestamp }) => {
+const SingleAnnouncement = ({ announcement, timestamp }) => {
+  let converted_timestamp = new Date(timestamp).toLocaleString(undefined, {
+    timeZone: "Asia/Kolkata",
+  });
+  console.log(converted_timestamp);
   const monthNames = [
+    "",
     "Jan",
     "Feb",
     "Mar",
@@ -54,11 +59,12 @@ const SingleAnnouncement = ({ announcement, my_timestamp }) => {
   ];
   return (
     <main className="announce-container">
-      {my_timestamp.slice(8, 10) +
+      {converted_timestamp.slice(3, 5) +
         " " +
-        monthNames[my_timestamp.slice(5, 7)] +
+        monthNames[converted_timestamp.slice(0, 2)] +
         " " +
-        my_timestamp.slice(11, 16)}
+        converted_timestamp.slice(6, 10) +
+        converted_timestamp.slice(11)}
       <div className="announcWrapper">
         <i className="bi bi-megaphone"></i>
         <div>{announcement}</div>
@@ -66,4 +72,4 @@ const SingleAnnouncement = ({ announcement, my_timestamp }) => {
     </main>
   );
 };
-export default StudentAnnouncement
+export default StudentAnnouncement;

@@ -3,6 +3,7 @@ import { useParams, useLocation } from "react-router-dom";
 import Loading from "../../../Loading";
 import Axios from "axios";
 import { useGlobalContext } from "../../../context";
+import moment from "moment";
 
 function MySubmission() {
   const { courseId } = useParams();
@@ -10,24 +11,24 @@ function MySubmission() {
   const { info } = useGlobalContext();
   const { assignmentId, assignFile, assignFileName, title, topic, deadline } =
     location.state;
-  const time = deadline.slice(0, 10) + ", " + deadline.slice(-5) + " hr";
-  const [myAssign,setMyAssign]=useState({});
+  const time = deadline;
+  const [myAssign, setMyAssign] = useState({});
   async function getMyfile() {
     await Axios.post("http://localhost:3002/getMyAssignments", {
       assignmentId,
       studentId: info.id,
     }).then((res) => {
       setMyAssign(res.data[0]);
-      if(res.data.length!==0){
-        setMessage(`Turned In ${res.data[0].late===0 ? 'late':''} `);
+      if (res.data.length !== 0) {
+        setMessage(`Turned In ${res.data[0].late === 0 ? "late" : ""} `);
         setOpt(unsubmit);
       }
     });
   }
-  useEffect(()=>{
+  useEffect(() => {
     getMyfile();
-  },[])
-/************************************* */
+  }, []);
+  /************************************* */
   const [file, setFile] = useState();
   const [fileName, setFileName] = useState("");
   const saveFile = (e) => {
@@ -36,16 +37,18 @@ function MySubmission() {
   };
   const uploadFile = async (e) => {
     e.preventDefault();
-    const currTime = new Date().toLocaleString();
-    let late=1;
-    if (currTime < time){
-      late=0;
+    let currTime = moment().format().slice(0, -9);
+    console.log("Curr time: ", currTime);
+    console.log("time", time);
+    let late = 1;
+    if (currTime < time) {
+      late = 0;
     }
+    console.log(late);
     const formData = new FormData();
     formData.append("file", file);
     formData.append("fileName", fileName);
     formData.append("comment", comment);
-    formData.append("roll", roll);
     formData.append("courseId", courseId);
     formData.append("assignmentId", assignmentId);
     formData.append("studentId", info.id);
@@ -55,16 +58,14 @@ function MySubmission() {
       await Axios.post(
         "http://localhost:3002/uploadMyAssignment",
         formData
-        ).then(async(res)=>{
+      ).then(async (res) => {
         await getMyfile();
-        setMessage(`Turned In ${late === 0 ? "late" : ""} `);
+        setMessage(`Turned In ${late === 0 ? "" : "late"} `);
         setOpt(unsubmit);
-        setRoll("");
-        setComment('');
+        setComment("");
         setFile();
-        setFileName('');
+        setFileName("");
         alert("Uploaded Successfully");
-
       });
     } catch (ex) {
       console.log(ex);
@@ -78,26 +79,16 @@ function MySubmission() {
     }).then((res) => {
       setMessage("Turn In");
       setOpt(submit);
-      setRoll("");
       setComment("");
       setFile();
       setFileName("");
     });
   };
-  const submit = (
-    <button className="btn btn-quiz" >
-      Submit
-    </button>
-  ); 
-  const unsubmit = (
-    <button className="btn btn-quiz">
-      UnSubmit
-    </button>
-  );
-  const [comment,setComment]=useState('');
-  const [roll,setRoll]=useState('');
-  const [message,setMessage]=useState('Turn In');
-  const [opt,setOpt]=useState(submit);
+  const submit = <button className="btn btn-quiz">Submit</button>;
+  const unsubmit = <button className="btn btn-quiz">UnSubmit</button>;
+  const [comment, setComment] = useState("");
+  const [message, setMessage] = useState("Turn In");
+  const [opt, setOpt] = useState(submit);
 
   return (
     <div>
@@ -130,15 +121,6 @@ function MySubmission() {
         <div className="ques-container">
           {message === "Turn In" && (
             <>
-              <label htmlFor="roll">Roll No. : </label>
-              <input
-                type="text"
-                name="roll"
-                id="roll"
-                value={roll}
-                onChange={(e) => setRoll(e.target.value)}
-              />
-              <br />
               <div className="fileUpload" style={{ marginTop: "3em" }}>
                 <label
                   htmlFor="file-upload"
@@ -180,10 +162,7 @@ function MySubmission() {
           )}
           {message !== "Turn In" && (
             <div style={{ textAlign: "left" }}>
-              <h3 className="heading" >
-                View your Submitted File
-              </h3>
-              <p>Roll No : {myAssign.roll}</p>
+              <h3 className="heading">View your Submitted File</h3>
               <div className="up-file">
                 <a
                   href={myAssign.file}
@@ -195,7 +174,11 @@ function MySubmission() {
                   {myAssign.fileName}
                 </a>
               </div>
-              {myAssign.comment!=='' && <div className="assign-commnent">You Commented : {myAssign.comment}</div>}
+              {myAssign.comment !== "" && (
+                <div className="assign-commnent">
+                  You Commented : {myAssign.comment}
+                </div>
+              )}
             </div>
           )}
           {opt}

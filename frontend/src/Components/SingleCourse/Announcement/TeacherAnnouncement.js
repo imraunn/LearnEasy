@@ -68,8 +68,12 @@ function TeacherAnnouncement({ id }) {
     </div>
   );
 }
-const SingleAnnouncement = ({ announcement, my_timestamp }) => {
+const SingleAnnouncement = ({ announcement, timestamp }) => {
+  let converted_timestamp = new Date(timestamp).toLocaleString(undefined, {
+    timeZone: "Asia/Kolkata",
+  });
   const monthNames = [
+    "",
     "Jan",
     "Feb",
     "Mar",
@@ -86,11 +90,12 @@ const SingleAnnouncement = ({ announcement, my_timestamp }) => {
   return (
     <main className="announce-container">
       <div className="announceTime">
-        {my_timestamp.slice(8, 10) +
+        {converted_timestamp.slice(3, 5) +
           " " +
-          monthNames[my_timestamp.slice(5, 7)] +
+          monthNames[converted_timestamp.slice(0, 2)] +
           " " +
-          my_timestamp.slice(11, 16)}
+          converted_timestamp.slice(6, 10) +
+          converted_timestamp.slice(11)}
       </div>
       <div className="announcWrapper">
         <i className="bi bi-megaphone"></i>

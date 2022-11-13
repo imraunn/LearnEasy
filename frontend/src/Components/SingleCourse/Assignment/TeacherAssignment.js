@@ -28,15 +28,14 @@ function TeacherAssignment({ id }) {
     formData.append("title", title);
     formData.append("topic", topic);
     formData.append("deadline", deadline);
-    alert(fileName)
+    // alert(fileName)
     console.log(formData);
     try {
-      await Axios.post(
-        "http://localhost:3002/uploadAssignment",
-        formData
-      ).then(async(res)=>{
-        await getAssignments();
-      });
+      await Axios.post("http://localhost:3002/uploadAssignment", formData).then(
+        async (res) => {
+          await getAssignments();
+        }
+      );
     } catch (ex) {
       console.log(ex);
     }
@@ -45,7 +44,7 @@ function TeacherAssignment({ id }) {
   const [title, setTitle] = useState("");
   const [topic, setTopic] = useState("");
   const [deadline, setDeadline] = useState();
-  
+
   useEffect(() => {
     getAssignments();
   }, []);
@@ -123,7 +122,7 @@ const SingleAssignment = ({
   topic,
   deadline,
 }) => {
-    const time = deadline.slice(0, 10) + ", " + deadline.slice(-5)+" hr";
+  const time = deadline.slice(0, 10) + ", " + deadline.slice(-5) + " hr";
   return (
     <div className="ques-container">
       <h3 style={{ fontWeight: "300" }}>{title}</h3>
@@ -143,10 +142,10 @@ const SingleAssignment = ({
             state: {
               title: title,
               topic: topic,
-              file:file,
-              fileName:fileName,
-              deadline:deadline,
-              assignmentId
+              file: file,
+              fileName: fileName,
+              deadline: deadline,
+              assignmentId,
             },
           }}
         >

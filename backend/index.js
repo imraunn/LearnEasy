@@ -203,7 +203,6 @@ app.post("/uploadMyAssignment", upload4.single("file"), (req, res) => {
       assignmentId: req.body.assignmentId,
       file: fileSrc,
       fileName: req.body.fileName,
-      roll: req.body.roll,
       comment: req.body.comment,
       late: req.body.late,
     })
@@ -231,7 +230,7 @@ app.post("/getMyAssignments", (req, res) => {
       assignmentId: req.body.assignmentId,
       studentId: req.body.studentId,
     })
-    .select("file", "fileName", "comment", "roll", "late")
+    .select("file", "fileName", "comment", "late")
     .then((result) => {
       //console.log(result)
       res.send(result);
@@ -239,7 +238,7 @@ app.post("/getMyAssignments", (req, res) => {
 });
 
 app.post("/viewStudentAssignmentSubmission", (req, res) => {
-  const query = `select file,fileName,comment,roll,late,name,photo,assignment_submissionId from assignment_submission as ass, user where ass.studentId=user.id and user.role='Student' and ass.assignmentId=${req.body.assignmentId}`;
+  const query = `select file,fileName,comment,late,name,photo,assignment_submissionId from assignment_submission as ass, user where ass.studentId=user.id and user.role='Student' and ass.assignmentId=${req.body.assignmentId}`;
   knex
     .raw(query)
     .then((result) => {
@@ -351,7 +350,7 @@ app.post("/getAnnouncement", (req, res) => {
     .select()
     .where({ courseId: req.body.id })
     .then((result) => {
-      //console.log(result)
+      console.log(result);
       res.send(result);
     });
 });

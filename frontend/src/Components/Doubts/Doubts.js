@@ -1,36 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { useGlobalContext } from "../../context";
 import "./Doubts.css";
-import Axios from 'axios';
+import Axios from "axios";
 import logo from "../../assets/web-logo-light.jpg";
 import { Link } from "react-router-dom";
 
 function Doubts() {
-  const {info}=useGlobalContext();
-  const [flag,setFlag]=useState(false);
-  const [title,setTitle]=useState('');  
-  const [doubt,setDoubt]=useState('');  
-  const [topic,setTopic]=useState(''); 
+  const { info } = useGlobalContext();
+  const [flag, setFlag] = useState(false);
+  const [title, setTitle] = useState("");
+  const [doubt, setDoubt] = useState("");
+  const [topic, setTopic] = useState("");
 
-  const [doubtList,setDoubtList]=useState([]);
+  const [doubtList, setDoubtList] = useState([]);
 
-  useEffect(()=>{
-    Axios.get("http://localhost:3002/getDoubtList").then((res)=>{
+  useEffect(() => {
+    Axios.get("http://localhost:3002/getDoubtList").then((res) => {
       console.log(res.data);
       setDoubtList(res.data);
     });
-  },[]);
+  }, []);
 
-  const askDoubtHandler=()=>{
-    Axios.post("http://localhost:3002/askDoubt",{
-      askerId:info.id,
+  const askDoubtHandler = () => {
+    Axios.post("http://localhost:3002/askDoubt", {
+      askerId: info.id,
       title,
       topic,
-      question:doubt,
-  }).then((res)=>{
-      alert('succesfully uploaded your doubt')
+      question: doubt,
+    }).then((res) => {
+      alert("succesfully uploaded your doubt");
     });
-  } 
+  };
   return (
     <main>
       <header>
@@ -52,6 +52,7 @@ function Doubts() {
               <div>
                 <label htmlFor="title">Title : </label>
                 <input
+                  required
                   style={{ width: "33em" }}
                   type="text"
                   name="topic"
@@ -63,6 +64,7 @@ function Doubts() {
               <div>
                 <label htmlFor="topic">Topic : </label>
                 <input
+                  required
                   type="text"
                   name="topic"
                   id="topic"
@@ -72,8 +74,9 @@ function Doubts() {
               </div>
             </div>
 
-            <label htmlFor="doubt">Doubts : </label>
+            <label htmlFor="doubt">Doubt : </label>
             <textarea
+              required
               type="text"
               name="doubt"
               id="doubt"
@@ -86,7 +89,7 @@ function Doubts() {
           </form>
         </div>
       )}
-      <div style={{marginTop:'1.5em'}}>
+      <div style={{ marginTop: "1.5em" }}>
         {doubtList.map((doubt) => {
           return <SingleDoubt key={doubt.doubtId} {...doubt} />;
         })}
@@ -94,7 +97,16 @@ function Doubts() {
     </main>
   );
 }
-const SingleDoubt=({doubtId,question,title,topic,status,askerId,photo,name})=>{
+const SingleDoubt = ({
+  doubtId,
+  question,
+  title,
+  topic,
+  status,
+  askerId,
+  photo,
+  name,
+}) => {
   if (!photo) {
     photo = logo;
   }
@@ -106,7 +118,7 @@ const SingleDoubt=({doubtId,question,title,topic,status,askerId,photo,name})=>{
         </div>
         <br />
         <div>
-          <h4 className='doubtTitle'>
+          <h4 className="doubtTitle">
             <Link
               to={{
                 pathname: `/answerDoubt/`,
@@ -134,5 +146,5 @@ const SingleDoubt=({doubtId,question,title,topic,status,askerId,photo,name})=>{
       </div>
     </div>
   );
-}
-export default Doubts
+};
+export default Doubts;

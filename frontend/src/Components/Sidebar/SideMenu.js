@@ -8,10 +8,10 @@ import Axios from "axios";
 import { useGlobalContext } from "../../context";
 
 const SideMenu = (props) => {
-  const history=useHistory();
-  const {image,name,info}=useGlobalContext();
+  const history = useHistory();
+  const { image, name, info } = useGlobalContext();
   const [inactive, setInactive] = useState(false);
- 
+
   useEffect(() => {
     if (inactive) {
       removeActiveClassFromSubMenu();
@@ -55,7 +55,7 @@ const SideMenu = (props) => {
     <div className={`side-menu ${inactive ? "inactive" : ""}`}>
       <div className="top-section">
         <div className="logo">
-          <img src={logo} alt="web-logo" />
+          <img src={logo} />
         </div>
         <div onClick={() => setInactive(!inactive)} className="toggle-menu-btn">
           {inactive ? (
@@ -64,14 +64,6 @@ const SideMenu = (props) => {
             <i className="bi bi-arrow-left-square-fill"></i>
           )}
         </div>
-      </div>
-
-      <div className="search-controller">
-        <button className="search-btn">
-          <i className="bi bi-search"></i>
-        </button>
-
-        <input type="text" placeholder="search" />
       </div>
 
       <div className="divider"></div>
@@ -96,18 +88,13 @@ const SideMenu = (props) => {
       </div>
 
       <div className="side-menu-footer">
-        <div className="profPic">
-          {image && <img src={image} alt="user" />}
-        </div>
+        <div className="profPic">{image && <img src={image} alt="user" />}</div>
         <div className="user-info">
           <div className="profile-info-wrapper">
             <h5>{name}</h5>
             <p>{info.email}</p>
           </div>
-          <i
-            className="bi bi-box-arrow-right"
-            onClick={handleLogout}
-          ></i>
+          <i className="bi bi-box-arrow-right" onClick={handleLogout}></i>
         </div>
       </div>
     </div>

@@ -7,6 +7,5 @@ CREATE TABLE `doubt` (
   `status` tinyint NOT NULL DEFAULT '0',
   `askerId` bigint NOT NULL,
   PRIMARY KEY (`doubtId`),
-  KEY `fk_doubtAns_replierId_idx` (`askerId`),
   CONSTRAINT `fk_doubt_askerId` FOREIGN KEY (`askerId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
