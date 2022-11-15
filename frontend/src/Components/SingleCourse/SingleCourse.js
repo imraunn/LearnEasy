@@ -5,9 +5,6 @@ import Assignment from "./Assignment/Assignment";
 
 function SingleCourse() {
   const { id } = useParams();
-  // const location=useLocation();
-  // const {name,courseName}=location.state;
-  // console.log(location.state);
   const choice = [<Announcement id={id} />, <Assignment id={id} />];
   const [opt, setOpt] = useState(0);
   return (
@@ -28,10 +25,6 @@ function SingleCourse() {
         <hr />
       </header>
       <div className="choice">{choice[opt]}</div>
-      {/* <div className="courseName">
-          {name}
-          <h1>dfhgfds</h1>
-        </div> */}
     </main>
   );
 }

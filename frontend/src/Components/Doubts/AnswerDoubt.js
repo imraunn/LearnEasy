@@ -6,33 +6,38 @@ import { useGlobalContext } from "../../context";
 
 function AnswerDoubt() {
   const { info } = useGlobalContext();
-  const location=useLocation();
-  const {doubtId,question,title,topic,status,askerId,photo,name}=location.state;
+  const location = useLocation();
+  const { doubtId, question, title, topic, status, askerId, photo, name } =
+    location.state;
   if (!photo) {
     photo = logo;
   }
-  const [answer,setAnswer]=useState('');
-  const [answerList,setAnswerList]=useState([]);
-  const getAllAnswer=()=>{
+  const [answer, setAnswer] = useState("");
+  const [answerList, setAnswerList] = useState([]);
+  const getAllAnswer = () => {
     Axios.post("http://localhost:3002/getDoubtAnswers", { doubtId }).then(
       (res) => {
         console.log(res.data[0]);
         setAnswerList(res.data[0]);
       }
     );
-  }
-  useEffect(()=>{
+  };
+  useEffect(() => {
     getAllAnswer();
-  },[]);
-    
-  const addAnswer=async(e)=>{
+  }, []);
+
+  const addAnswer = async (e) => {
     e.preventDefault();
-    await Axios.post("http://localhost:3002/addDoubtAnswer",{doubt_ans:answer,doubtId,replierId:info.id}).then(()=>{
-      setAnswer('');
-      alert('successfully answered');
+    await Axios.post("http://localhost:3002/addDoubtAnswer", {
+      doubt_ans: answer,
+      doubtId,
+      replierId: info.id,
+    }).then(() => {
+      setAnswer("");
+      alert("successfully answered");
     });
     await getAllAnswer();
-  }
+  };
   return (
     <div>
       <header>
@@ -69,7 +74,7 @@ function AnswerDoubt() {
         />
         <button className="btn btn-doubt">Add Answer</button>
       </form>
-      <h3>Some Answers : </h3>
+      <h3>Answers : </h3>
       <div style={{ marginTop: "1.5em" }}>
         {answerList.map((ans) => {
           return <SingleAnswer key={ans.doubt_ansId} {...ans} />;
@@ -84,15 +89,16 @@ const SingleAnswer = ({ name, photo, doubt_ans, doubt_ansId }) => {
   }
   return (
     <div>
-      <div className="std-up-file" style={{ padding: "1.7em",margin:'auto',marginTop:'3em' }}>
+      <div
+        className="std-up-file"
+        style={{ padding: "1.7em", margin: "auto", marginTop: "3em" }}
+      >
         <div className="profilePic">
           <img src={photo} alt="user" />
         </div>
         <br />
         <div>
-          <div>
-            {doubt_ans}
-          </div>
+          <div>{doubt_ans}</div>
           <div className="doubtAskerName">{name}</div>
         </div>
       </div>

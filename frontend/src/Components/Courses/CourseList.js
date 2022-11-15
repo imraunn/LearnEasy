@@ -65,18 +65,8 @@ const Course = ({
       Axios.post("http://localhost:3002/enrollMe", {
         studentId: info.id,
         courseId: courseId,
-        // status: "Enrolled",
       }).then((res) => {
         alert(res.data);
-        // const myNewCourses = myCoursesId;
-        // var low=0,high=myNewCourses.length;
-        // while (low < high) {
-        //   let mid = (low + high) >>> 1;
-        //   if (myNewCourses[mid] < courseId) low = mid + 1;
-        //   else high = mid;
-        // }
-        // myNewCourses.splice(low, 0, courseId);
-        // setmyCoursesId(myNewCourses);
         setStatus(afterEnrollment);
         setcflag(!cflag);
       });

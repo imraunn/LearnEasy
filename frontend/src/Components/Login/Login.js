@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-// import gmail from "../../assets/gmail.png";
 import Axios from "axios";
-// import {GoogleLogin} from "react-google-login";
 
 const Login = ({ setLoginStatus }) => {
   const [email, setEmail] = useState("");

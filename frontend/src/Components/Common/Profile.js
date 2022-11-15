@@ -56,13 +56,6 @@ function Profile() {
     setImage(null);
   };
 
-  // useEffect(() => {
-  //     Axios.post("http://localhost:3002/getProfile",{id:id}).then((res)=>{
-  //       setName(res.data[0].name);
-  //       if (res.data[0].photo) setImage(res.data[0].photo);
-  //       setContact(res.data[0].contact);
-  //     })
-  //   }, [id]);
   const email = info.email;
   const role = info.role;
   return (

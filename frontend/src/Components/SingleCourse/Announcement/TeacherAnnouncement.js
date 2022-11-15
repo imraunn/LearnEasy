@@ -52,12 +52,12 @@ function TeacherAnnouncement({ id }) {
       {postAnnouncement.length !== 0 && (
         <div className="heading">Previous Announcements</div>
       )}
-
       <br />
       {postAnnouncement
         .slice(0)
         .reverse()
         .map((announcement) => {
+          // console.log("HEHE: ", announcement);
           return (
             <SingleAnnouncement
               key={announcement.announcementId}
@@ -69,9 +69,11 @@ function TeacherAnnouncement({ id }) {
   );
 }
 const SingleAnnouncement = ({ announcement, timestamp }) => {
-  let converted_timestamp = new Date(timestamp).toLocaleString(undefined, {
+  // console.log("abcd", timestamp);
+  let converted_timestamp = new Date(timestamp).toLocaleString("en", {
     timeZone: "Asia/Kolkata",
   });
+  // console.log("CONVERTED: ", converted_timestamp);
   const monthNames = [
     "",
     "Jan",

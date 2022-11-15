@@ -38,10 +38,10 @@ function StudentAnnouncement({ id }) {
   );
 }
 const SingleAnnouncement = ({ announcement, timestamp }) => {
-  let converted_timestamp = new Date(timestamp).toLocaleString(undefined, {
+  let converted_timestamp = new Date(timestamp).toLocaleString("en", {
     timeZone: "Asia/Kolkata",
   });
-  console.log(converted_timestamp);
+  // console.log(converted_timestamp);
   const monthNames = [
     "",
     "Jan",

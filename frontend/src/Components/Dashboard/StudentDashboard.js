@@ -14,11 +14,11 @@ function StudentDashboard() {
   return (
     <section className="section">
       {myCourseList.length === 0 && (
-        <div className="no-item" style={{marginTop:"1.5em"}} >
+        <div className="no-item" style={{ marginTop: "1.5em" }}>
           <h2>Enroll in a course from course-section </h2>
           <div>
             <img
-              style={{ height: "50vh", width: "40vw",marginTop:"1.5em" }}
+              style={{ height: "50vh", width: "40vw", marginTop: "1.5em" }}
               src={emptyImg}
               alt="file"
             />
@@ -44,12 +44,6 @@ const MyCourse = ({
   photo,
 }) => {
   const mod = color.length;
-  //   const { info } = useGlobalContext();
-  // let history = useHistory();
-  // function handleLink() {
-  //   history.push(`/courses/${courseId}`,{name:name,courseId:courseId});
-  //   console.log(history);
-  // }
   let image = user;
   if (photo) image = photo;
 
@@ -74,7 +68,6 @@ const MyCourse = ({
       <div className="enroll">
         <button className="btn btn-enroll">
           <Link
-            // onClick={handleLink}
             to={{
               pathname: `/courses/${courseId}`,
               state: {
@@ -83,7 +76,6 @@ const MyCourse = ({
               },
             }}
             className="link-btn"
-            // state={{name: courseName }}
           >
             Go to course
           </Link>
