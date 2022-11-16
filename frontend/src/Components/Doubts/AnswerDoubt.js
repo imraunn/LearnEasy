@@ -7,7 +7,7 @@ import { useGlobalContext } from "../../context";
 function AnswerDoubt() {
   const { info } = useGlobalContext();
   const location = useLocation();
-  const { doubtId, question, title, topic, status, askerId, photo, name } =
+  const { doubtId, question, title, topic, askerId, photo, name } =
     location.state;
   if (!photo) {
     photo = logo;

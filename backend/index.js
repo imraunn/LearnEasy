@@ -358,6 +358,7 @@ app.post("/getAnnouncement", (req, res) => {
 /*******************************************/
 //Doubt
 app.post("/askDoubt", (req, res) => {
+  console.log("BAL", req.body);
   knex("doubt")
     .insert(req.body)
     .then((result) => {
@@ -368,16 +369,7 @@ app.post("/askDoubt", (req, res) => {
 app.get("/getDoubtList", (req, res) => {
   knex("doubt")
     .join("user", "doubt.askerId", "=", "user.id")
-    .select(
-      "name",
-      "photo",
-      "doubtId",
-      "question",
-      "title",
-      "topic",
-      "status",
-      "askerId"
-    )
+    .select("name", "photo", "doubtId", "question", "title", "topic", "askerId")
     .then((result) => {
       //console.log(result)
       res.send(result);
@@ -385,6 +377,7 @@ app.get("/getDoubtList", (req, res) => {
 });
 
 app.post("/addDoubtAnswer", (req, res) => {
+  console.log("SS", req.body);
   knex("doubt_ans")
     .insert(req.body)
     .then((result) => {

@@ -3,7 +3,7 @@ CREATE TABLE `user` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `role` varchar(45) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `password` varchar(255) DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
   `photo` varchar(5000) DEFAULT NULL,
   `contact` bigint DEFAULT NULL,
   `name` varchar(45) NOT NULL,
@@ -15,7 +15,7 @@ DROP TABLE IF EXISTS `courses`;
 CREATE TABLE `courses` (
   `courseId` bigint NOT NULL AUTO_INCREMENT,
   `courseName` varchar(100) NOT NULL,
-  `credits` int DEFAULT NULL,
+  `credits` int DEFAULT 0,
   `bio` text NOT NULL,
   `teacherId` bigint NOT NULL,
   `prerequisite` text NOT NULL,
@@ -78,7 +78,6 @@ CREATE TABLE `doubt` (
   `question` text NOT NULL,
   `title` varchar(100) NOT NULL,
   `topic` varchar(100) NOT NULL,
-  `status` tinyint NOT NULL DEFAULT '0',
   `askerId` bigint NOT NULL,
   PRIMARY KEY (`doubtId`),
   CONSTRAINT `fk_doubt_askerId` FOREIGN KEY (`askerId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE

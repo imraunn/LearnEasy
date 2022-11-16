@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS `courses`;
 CREATE TABLE `courses` (
   `courseId` bigint NOT NULL AUTO_INCREMENT,
   `courseName` varchar(100) NOT NULL,
-  `credits` int DEFAULT NULL,
+  `credits` int DEFAULT 0,
   `bio` text NOT NULL,
   `teacherId` bigint NOT NULL,
   `prerequisite` text NOT NULL,
